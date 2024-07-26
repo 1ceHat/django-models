@@ -1,0 +1,28 @@
+{%block title_shop%}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>Получи игру в пару кликов!</title>
+
+    </head>
+{%endblock%}
+
+<body>
+    {% block pagename %}
+    <h1>Главная страница</h1>
+    {% endblock%}
+
+    {% block menu %}
+    <h5>
+        <ul>
+            <li><p><a href="/platform">Главная</a></p></li>
+            <li><p><a href="/platform/shop">Магазин</a></p></li>
+            <li><p><a href="/platform/basket">Корзина</a></p></li>
+        </ul>
+    </h5>
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "menu.html" %}
+
+{% block title_shop %}
+    {{ block.super }}
+{% endblock %}
+<body>
+    {% block pagename %}
+        <h1>Игры</h1>
+    {% endblock %}
+
+    {% block menu %}
+        {{ block.super }}
+    {% endblock %}
+
+
+    {% block content %}
+        <h2>
+            <p>
+                <ul>
+                    {% for game in games %}
+                    <li><p>
+                            {{game}} <button>Купить</button>
+                        </p>
+                    {% endfor %}
+                </ul>
+            </p>
+        </h2>
+        <p>
+            <a href="/platform"><button> Вернуться на главную</button></a>
+            <a href="/platform/basket"><button>Перейти в корзину</button></a>
+        </p>
+    {% endblock %}
+</body>
+</html>
