@@ -12,20 +12,59 @@
         {{ block.super }}
     {% endblock %}
 
-
     {% block content %}
-        <h2>
+        {{test}}
+        <form method="get">
+            <select itemtype="" name="el_on_page">
+                <option selected disabled>{{obj_pp}}</option>
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+            </select>
+            <input type="submit" value="Применить"></input>
+        </form>
+
+        {{info.message}}
+
+        <div class="row">
             <p>
                 <ul>
-                    {% for game in games %}
-                    <li><p>
-                            {{game}} <button>Купить</button>
-                        </p>
+                    {% for game in page_obj %}
+                    <p>{{game}} <button>Купить</button></p>
                     {% endfor %}
                 </ul>
             </p>
-        </h2>
-        <p>
+        </div>
+
+
+        {% if page_obj.has_other_pages %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo</span>
+                        </a>
+                    {% endif %}
+
+                    {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            {{ i }}
+                        {% else %}
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&raquo</span>
+                        </a>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+    <p>
             <a href="/platform"><button> Вернуться на главную</button></a>
             <a href="/platform/basket"><button>Перейти в корзину</button></a>
         </p>

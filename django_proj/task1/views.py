@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import UserRegister
+from django.core.paginator import Paginator
 from .models import *
 
 # Create your views here.
@@ -10,9 +11,16 @@ def main_page(request):
 
 
 def shop_page(request):
+    obj_per_page = request.GET.get('el_on_page')
     games = Game.objects.all()
+    paginator = Paginator(games, per_page=1 if obj_per_page is None else obj_per_page)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
+
     context = {
         'games': games,
+        'page_obj': page_obj,
+        'obj_pp': obj_per_page,
     }
     return render(request, 'shop_page.html', context=context)
 
